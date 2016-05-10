@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_activity"
+    android:paddingBottom="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".SplashScreenActivity">
+
+    <ImageView
+        android:id="@+id/lamp_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/lamp"
+        android:layout_alignBottom="@+id/light_bulb"
+        android:layout_alignLeft="@+id/led"
+        android:layout_alignStart="@+id/led"
+        android:paddingLeft="30dp"
+        />
+
+    <ImageView
+        android:id="@+id/light_bulb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/light_bulb"/>
+
+
+    <ImageView
+        android:id="@+id/led"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/svg_led"
+        android:layout_alignBottom="@+id/light_bulb"
+        android:layout_toLeftOf="@+id/light_bulb"
+        android:layout_marginRight="-99dp"
+        android:layout_toStartOf="@+id/light_bulb"
+        android:layout_marginBottom="62dp"
+        android:paddingLeft="30dp"/>
+    <ImageView
+        android:id="@+id/economist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/economist"
+        android:layout_below="@+id/lamp_text"
+        android:layout_alignLeft="@id/lamp_text"
+        android:layout_marginTop="13dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"/>
+
+    <TextView
+        android:id="@+id/text_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_text"
+        android:layout_below="@id/economist"
+        android:layout_marginTop="30dp"
+        android:textColor="#000000"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:textSize="13sp"
+        android:lineSpacingExtra="12dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_button"
+        android:id="@+id/buttonStart"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:onClick="onClickStart"
+        android:layout_marginTop="43dp"
+        android:background="#e74c3c"
+        android:textColor="#ffffff"
+        />
+
+
+</RelativeLayout>

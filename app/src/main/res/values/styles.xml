@@ -1,0 +1,86 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">#e74c3c</item>
+        <item name="tabBackground">@color/colorWhite</item>
+        <item name="tabTextAppearance">@style/MyCustomTextAppearance</item>
+    </style>
+
+    <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="PageTitle">
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#e74c3c</item>
+    </style>
+    <style name="Subhead">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#de000000</item>
+    </style>
+    <style name="FieldPlaceholder">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#61000000</item>
+    </style>
+    <style name="MaterialLightSubheadDisabled">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#61000000</item>
+    </style>
+    <style name="Description">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#333333</item>
+    </style>
+    <style name="FieldLabel">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#61000000</item>
+    </style>
+
+    <style name="EconomyValueOrange">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#e74c3c</item>
+        <item name="android:drawableRight">@drawable/ic_rouble_orange</item>
+        <item name="android:drawableLeft">@drawable/ic_sm_lamp_orange</item>
+        <item name="android:drawablePadding">5dp</item>
+    </style>
+
+    <style name="EconomyValueGray">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#7f7f7f</item>
+        <item name="android:drawableRight">@drawable/ic_rouble_gray</item>
+        <item name="android:drawableLeft">@drawable/ic_sm_lamp_gray</item>
+        <item name="android:drawablePadding">5dp</item>
+    </style>
+
+    <style name="buttonNext">
+        <item name="android:background">#e74c3c</item>
+    </style>
+</resources>

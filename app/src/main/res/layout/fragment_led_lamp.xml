@@ -1,0 +1,78 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
+    tools:context="com.github.miki48ru.ledlampeconomist.LampFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/PageTitle"
+            android:text="Светодиодная лампа" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Description"
+            android:text="Мощность лампы" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner3" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/FieldLabel"
+            android:text="Цена лампы, рублей" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/editText2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:text="Расходы на электричество за год без учета стоимости ламп" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textColor="#e74c3c"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:layout_gravity="center"
+            android:drawableRight="@drawable/ic_rouble_orange"
+            android:text="210,00 " />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/buttonNext"
+            android:drawableRight="@drawable/ic_r_arr"
+            android:text="Далее"
+            android:paddingRight="10dp"
+            android:id="@+id/bt_next_ledlamp" />
+
+
+    </LinearLayout>
+
+</FrameLayout>

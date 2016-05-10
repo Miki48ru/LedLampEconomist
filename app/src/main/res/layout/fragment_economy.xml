@@ -1,0 +1,72 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
+    tools:context="com.github.miki48ru.ledlampeconomist.LampFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/PageTitle"
+            android:text="Тариф на электричество" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Description"
+            android:text="@string/economy_description" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Subhead"
+            android:drawableBottom="@drawable/hor_line"
+            android:text="Выгода за первый год" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/hor_line"
+            android:id="@+id/imageView" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1000"
+                android:layout_weight="1"
+                style="@style/EconomyValueOrange"
+                android:id="@+id/textView" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2000"
+                android:layout_weight="1"
+                style="@style/EconomyValueGray"
+                android:id="@+id/textView2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-1000"
+                android:layout_weight="1"
+                style="@style/EconomyValueGray"
+                android:id="@+id/textView3" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>

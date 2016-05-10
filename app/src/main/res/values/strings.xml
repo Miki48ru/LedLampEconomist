@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">LedLampEconomistNew</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="electric_description">
+        Стоимость тарифа вы можете узнать из квитанции на оплату за электричество или на сайте вашей электросбытовой компании.
+    </string>
+
+    <string name="economy_description">
+        Информация по расходам складывается из покупки ламп, в том числе на замену, и расходов на оплату электроэнергии по тарифам.
+    </string>
+
+    <string name="greeting">Приветствие</string>
+    <string name="basicGreetingText"> \t Во всех средствах массовой информации нам неустанно говорят, как здорово использовать светодиодные лампы вместо ламп накаливания и самое главное, что это очень выгодно. Но придя в магазин и сравнивая ценны на «обычную» лампу и светодиодную, невольно задаешься вопросом, а так ли это выгодно? Когда окупится светодиодная лампа?
+\n \n \t Наша программа поможет Вам определиться с выбором, показав какую сумму вы сможете сэкономить, использую светодиодные лампы. Для этого нужно будет ввести данные по вашим тарифам на электроэнергию, сделать это можно заранее дома, и информацию по лампам, эту информацию можно вводить уже непосредственно в магазине, дабы окончательно определиться с выбором.
+И так, приступим?</string>
+    <string name="start_text">Оцените выгоду от использования различных типов ламп
+        и посчитайте их\u00A0 окупаемость с\u00A0 учетом технических параметров ламп
+        и тарифов на\u00A0 электричество.</string>
+    <string name="start_button">Посчитать экономию</string>
+    <string name="title_activity_rates">RatesActivity</string>
+    <string name="button_ago">Назад</string>
+    <string name="button_forward">Вперед</string>
+    <string name="button_rates">Ввод данных по лампам</string>
+    <string name="rates_title">Расчет тарифов</string>
+    <string name="rate1">Тариф №1</string>
+    <string name="text1">Стоимость тарифа, руб/час</string>
+    <string name="text2">Среднее кол-во часов работы в день \n по тарифу 1. час:</string>
+    <string name="text3">Кол-во отработанных часов за год по Тарифу 1: </string>
+    <string name="text4">Учитывать удорожание тарифов в процентах в год (выберите ниже). </string>
+    <string name="text5">365 часов </string>
+    <string name="text6">______________________________________________ </string>
+    <string name="rate2">Тариф №2</string>
+    <string name="check_summary">Вкл. или Выкл. Тарифа №2.</string>
+    <string name="check_title">Тариф №2</string>
+    <string name="hints_summary">Если у Вас два тарифа, включите его и введите исходные данные.</string>
+    <string name="hints_title">Подсказки</string>
+    <string name="lamp_title">Ввод информации по лампам</string>
+    <string name="activity3_title">Обычная лампа</string>
+    <string name="icon_info_title">Обратите внимание!</string>
+    <string name="icon_info_close_button">Закрыть</string>
+    <string name="icon_info">Стоимость тарифа Вы можете посмотреть в квитанции на оплату или на сайте электросетевой компании.</string>
+    <string name="icon_info_rate_2">Если у вас однофазный электросчетчик, просто уберите галочку в начале строки, и расчет будет произведен по однотарифному варианту.</string>
+    <string name="text_lamp">Обычная лампочка</string>
+    <string name="text_power_lamp">Мощность, ватт</string>
+    <string name="price_lamp">Цена, руб. </string>
+    <string name="change_lamp">Кол-во замен лампы в год</string>
+    <string name="icon_info_change_lamp">Условная величина, так как скорость перегорания лампы зависит от множества факторов.
+        Можете поставить цифру на свое усмотрение, или посчитать ее с учетом количества отработанных часов за год, указанных на предыдущей странице. </string>
+    <string name="text_pay_energy">Расходы на оплату электроэнергии за первый год:</string>
+    <string name="rates_ago_text_button">К тарифам</string>
+    <string name="lamp_forward_text">К расчетам</string>
+    <string name="led_lamp">Светодиодная лампа</string>
+    <string name="settlements_activity">Расчеты</string>
+    <string name="text_one_settlments_activity">Информация по расходам включает в себя: покупку ламп,
+        покупку ламп на замену и расходы на оплату электроэнергии,
+        суммарно за количество лет.</string>
+    <string name="cell_1">Интервал расходов</string>
+    <string name="cell_2">Обычная лампа, руб</string>
+    <string name="cell_3">Светодиодная, руб</string>
+    <string name="cell_4">Выгода, руб</string>
+    <string name="cell_5">За первый год</string>
+    <string name="cell_6">За два года</string>
+    <string name="cell_7">За три года</string>
+    <string name="cell_8">За четыре года</string>
+    <string name="cell_9">За пять лет</string>
+    <string name="last_text">Как видно из таблицы, выигрыш по затратам появляется уже на ___ году использования светодиодных ламп. </string>
+    <string name="btn_lamp_update">обновить данные по лампам</string>
+    <string name="btn_new_info">дополнительная информация</string>
+</resources>
