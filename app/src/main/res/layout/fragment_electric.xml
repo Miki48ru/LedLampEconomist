@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editText" />
+            android:id="@+id/et_price" />
 
         <TextView
             android:layout_width="match_parent"
@@ -46,7 +46,7 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner2" />
+            android:id="@+id/spinner_hours" />
 
         <TextView
             android:layout_width="match_parent"
@@ -57,14 +57,15 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner" />
+            android:id="@+id/spinner_percent" />
 
-        <Switch
+        <android.support.v7.widget.SwitchCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Subhead"
             android:text="Двухтарифный счётчик"
-            android:id="@+id/sw_double_tax" />
+            android:id="@+id/sw_double_tax"
+            />
 
         <LinearLayout
             android:orientation="vertical"
@@ -84,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:ems="10"
-                android:id="@+id/editText3" />
+                android:id="@+id/et_price_2" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -95,7 +96,7 @@
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner4" />
+                android:id="@+id/spinner_hours_2" />
         </LinearLayout>
 
         <Button
