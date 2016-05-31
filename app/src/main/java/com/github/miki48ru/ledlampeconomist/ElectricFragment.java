@@ -3,6 +3,7 @@ package com.github.miki48ru.ledlampeconomist;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.transition.TransitionManager;
 import android.util.Log;
@@ -17,7 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-import android.widget.Switch;
+
 import android.support.v7.widget.SwitchCompat;
 
 
@@ -30,8 +31,7 @@ public class ElectricFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private float priceRateOne;
-    private float priceRateTwo;
+
 
     private static List<Integer> listSpinnerHours = new ArrayList<>();// список для выбора работы лампочки в часах
     private static List<Integer> listSpinnerRates2Hours = new ArrayList<>();// список для выбора работы лампочки в часах по тарифу 2
@@ -53,7 +53,8 @@ public class ElectricFragment extends Fragment {
     private float summPriceTwoRate = 0;
 
     private boolean checked;
-    final String LOG_TAG = "myLogs";
+    final String LOG_TAG = ElectricFragment.class.toString();
+
 
 
     // статически заполняем списки выборов так как никогда не меняются значения
@@ -88,21 +89,43 @@ public class ElectricFragment extends Fragment {
 
         mPrice = (EditText)getActivity().findViewById(R.id.et_price);
         mPrice2 = (EditText)getActivity().findViewById(R.id.et_price_2);
-
-        String price = mPrice.getText().toString();
-
-        summPrice = Float.parseFloat(String.valueOf(mPrice));
-        Log.d(LOG_TAG, "summ: " + summPrice);
-        summPriceTwoRate = Float.parseFloat(mPrice2.getText().toString());
+try {
+    summPrice = Float.parseFloat(mPrice.getText().toString());
+    Log.d(LOG_TAG, "summ: " + summPrice);
+    summPriceTwoRate = Float.parseFloat(mPrice2.getText().toString());
+} catch (NumberFormatException e){
+    e.printStackTrace();
+}
 
         Button btNext = (Button)getActivity().findViewById(R.id.btNextElectric);
         btNext.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
-                viewPager.setCurrentItem(1);
+                FragmentPagerAdapter adapter = (FragmentPagerAdapter)viewPager.getAdapter();
+                int pos = 1;
 
+                try {
+                    Log.d(LOG_TAG, "summ text :  " + mPrice.getText().toString());
+                    summPrice = Float.parseFloat(mPrice.getText().toString());
+                    Log.d(LOG_TAG, "summ: " + summPrice);
+                    if (!mPrice2.getText().toString().isEmpty()) {
+                        summPriceTwoRate = Float.parseFloat(mPrice2.getText().toString());
+                    }
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
 
+                Data.getInstance().setSummPrice(summPrice);
+                Log.d(LOG_TAG, "summ getInstance: " + summPrice);
+                Data.getInstance().setSummPriceTwoRate(summPriceTwoRate);
+                Data.getInstance().setResultTimeYears(resultTimeYears);
+                Data.getInstance().setResultTimeYearsTwoRate(resultTimeYearsTwoRate);
+                Data.getInstance().setSelectedHour(selectedHour);
+                Data.getInstance().setSelectedHourTwoRate(selectedHourTwoRate);
+                Data.getInstance().setPercent(percent);
+                Data.getInstance().setChecked(checked);
+
+                viewPager.setCurrentItem(pos);
             }
         });
 
@@ -234,8 +257,7 @@ public class ElectricFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
 
-                percent = (int) spinnerPercent.getSelectedItem();
-                Log.d(LOG_TAG, "percent: " + percent);// проценты из раскрывающегося списка по позиции
+                percent = (int) spinnerPercent.getSelectedItem();// проценты из раскрывающегося списка по позиции
 
             }
 
@@ -244,5 +266,7 @@ public class ElectricFragment extends Fragment {
             }
         });
     }
+
+
 
 }

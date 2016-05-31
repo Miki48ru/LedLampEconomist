@@ -13,9 +13,11 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
+    final String LOG_TAG = MainActivity.class.toString();
     ViewPager viewPager;
     int curPage = 0;
 
@@ -29,6 +31,30 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this));
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.d(LOG_TAG, "onPageSelected " + position);
+                // получаем ссылку на адаптер фрагментов pager'a
+                FragmentPagerAdapter adapter = (FragmentPagerAdapter) viewPager.getAdapter();
+                // получаем ссылку на сам фрагмент
+                Fragment fragment = adapter.getItem(position);
+
+                if (fragment instanceof LampFragment) {
+                    ((LampFragment) fragment).onSelected();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 }
