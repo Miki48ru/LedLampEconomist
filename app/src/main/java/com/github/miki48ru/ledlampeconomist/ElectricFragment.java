@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.transition.TransitionManager;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 import android.support.v7.widget.SwitchCompat;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -98,12 +100,20 @@ public class ElectricFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Log.d(LOG_TAG, "mPrice ElectricFrag onTextChanged: " + mPrice.getText().toString());
 
-                    summPrice = Float.parseFloat(mPrice.getText().toString());
-
-                Data.getInstance().setSummPrice(summPrice);
-                Log.d(LOG_TAG, "summ getInstance: " + summPrice);
-
+                Log.d(LOG_TAG, "mPrice ElectricFrag onTextChanged: " + s.toString());
+                if(TextUtils.isEmpty(s))
+                    s = "0";
+                    try {
+                        summPrice = Float.parseFloat(s.toString());
+                        Data.getInstance().setSummPrice(summPrice);
+                        Log.d(LOG_TAG, "summ getInstance: " + Data.getInstance().getSummPrice());
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity(), "Введены данные неверного формата", Toast.LENGTH_SHORT).show();
+                    }
             }
+
+
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -121,9 +131,17 @@ public class ElectricFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                summPriceTwoRate = Float.parseFloat(mPrice2.getText().toString());
-                Data.getInstance().setSummPrice(summPriceTwoRate);
-                Log.d(LOG_TAG, "summ getInstance: " + summPriceTwoRate);
+                Log.d(LOG_TAG, "mPrice ElectricFrag onTextChanged: " + s.toString());
+                if(TextUtils.isEmpty(s))
+                    s = "0";
+                try {
+                    summPriceTwoRate = Float.parseFloat(s.toString());
+                    Data.getInstance().setSummPriceTwoRate(summPriceTwoRate);
+                    Log.d(LOG_TAG, "summ getInstance: " + Data.getInstance().getSummPriceTwoRate());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "Введены данные неверного формата", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
@@ -142,8 +160,12 @@ public class ElectricFragment extends Fragment {
                 ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
                 FragmentPagerAdapter adapter = (FragmentPagerAdapter)viewPager.getAdapter();
                 int pos = 1;
+                try {
+                    viewPager.setCurrentItem(pos);
+                } catch (NullPointerException e){
+                    e.printStackTrace();
+                }
 
-                viewPager.setCurrentItem(pos);
             }
         });
 

@@ -1,5 +1,7 @@
 package com.github.miki48ru.ledlampeconomist;
 
+import android.util.Log;
+
 /**
  * Created by Mike on 23.05.2016.
  */
@@ -13,9 +15,45 @@ public class Data {
     private float summPrice = 0;
     private float summPriceTwoRate = 0;
     private boolean checked;
-
+    private float priceLamp;
+    private int changeLamp;
     private int selectedPower;
     private int watt = 1000;
+    private float priceLed;
+    private int powerLed;
+
+    public float getPriceLed() {
+        return priceLed;
+    }
+
+    public void setPriceLed(float priceLed) {
+        this.priceLed = priceLed;
+    }
+
+    public int getPowerLed() {
+        return powerLed;
+    }
+
+    public void setPowerLed(int powerLed) {
+        this.powerLed = powerLed;
+    }
+
+    public float getPriceLamp() {
+        return priceLamp;
+    }
+
+    public void setPriceLamp(float priceLamp) {
+        this.priceLamp = priceLamp;
+    }
+
+    public int getChangeLamp() {
+        return changeLamp;
+    }
+
+    public void setChangeLamp(int changeLamp) {
+        this.changeLamp = changeLamp;
+    }
+
 
     public int getSelectedPower() {
         return selectedPower;
@@ -76,7 +114,7 @@ public class Data {
     }
 
     public int getPercent() {
-        return percent;
+        return percent / 100 + 1;
     }
 
     public void setPercent(int percent) {
@@ -117,6 +155,38 @@ public class Data {
             float summPriceLamp = (selectedPower * resultTimeYears / watt * summPrice);
             return summPriceLamp;
         }
+    }
+    public float getSummPriceLed(){
+        if(checked){
+            float summPriceLed = (powerLed * resultTimeYears / watt * summPrice);
+            float summPriceTwoRateLed = (powerLed * resultTimeYearsTwoRate / watt * summPriceTwoRate);
+            return summPriceTwoRateLed + summPriceLed;
+        }else {
+            float summPriceLed = (powerLed * resultTimeYears / watt * summPrice);
+            return summPriceLed;
+        }
+    }
+
+    public float getResultPriceLampAllRates(){
+        float resultPriceLampAllRates = Math.round(((float) selectedPower / watt * resultTimeYears * summPrice) +
+                ((float) selectedPower / watt * resultTimeYearsTwoRate * summPriceTwoRate) +
+                (changeLamp * priceLamp)); //Math.round - округление значения
+        return resultPriceLampAllRates;
+    }
+    public float getResultPriceLampOneRates(){
+        float resultPriceLampOneRate = Math.round(((float) selectedPower / watt * resultTimeYears * summPrice) +
+                (changeLamp * priceLamp));
+        return resultPriceLampOneRate;
+    }
+    public float getResultPriceLedAllRates(){
+        float resultPriceLedAllRates = Math.round(((float) powerLed / watt * resultTimeYears * summPrice) +
+                ((float) powerLed / watt * resultTimeYearsTwoRate * summPriceTwoRate) + priceLamp); //Math.round - округление значения
+        return resultPriceLedAllRates;
+    }
+
+    public float getResultPriceLedOneRates(){
+        float resultPriceLedOneRate = Math.round(((float) powerLed / watt * resultTimeYears * summPrice) + priceLamp);
+        return resultPriceLedOneRate;
     }
 
 
