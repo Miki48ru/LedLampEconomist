@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,8 +46,6 @@ public class ElectricFragment extends Fragment {
     EditText mPrice;
     EditText mPrice2;
 
-    private int resultTimeYears;
-    private int resultTimeYearsTwoRate;
     private int selectedHour;
     private int selectedHourTwoRate;
     private int percent;
@@ -88,14 +88,53 @@ public class ElectricFragment extends Fragment {
         spinnerPercent = (Spinner)getActivity().findViewById(R.id.spinner_percent);
 
         mPrice = (EditText)getActivity().findViewById(R.id.et_price);
+        mPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d(LOG_TAG, "mPrice ElectricFrag onTextChanged: " + mPrice.getText().toString());
+
+                    summPrice = Float.parseFloat(mPrice.getText().toString());
+
+                Data.getInstance().setSummPrice(summPrice);
+                Log.d(LOG_TAG, "summ getInstance: " + summPrice);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         mPrice2 = (EditText)getActivity().findViewById(R.id.et_price_2);
-try {
-    summPrice = Float.parseFloat(mPrice.getText().toString());
-    Log.d(LOG_TAG, "summ: " + summPrice);
-    summPriceTwoRate = Float.parseFloat(mPrice2.getText().toString());
-} catch (NumberFormatException e){
-    e.printStackTrace();
-}
+        mPrice2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                summPriceTwoRate = Float.parseFloat(mPrice2.getText().toString());
+                Data.getInstance().setSummPrice(summPriceTwoRate);
+                Log.d(LOG_TAG, "summ getInstance: " + summPriceTwoRate);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+
 
         Button btNext = (Button)getActivity().findViewById(R.id.btNextElectric);
         btNext.setOnClickListener(new View.OnClickListener() {
@@ -103,27 +142,6 @@ try {
                 ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
                 FragmentPagerAdapter adapter = (FragmentPagerAdapter)viewPager.getAdapter();
                 int pos = 1;
-
-                try {
-                    Log.d(LOG_TAG, "summ text :  " + mPrice.getText().toString());
-                    summPrice = Float.parseFloat(mPrice.getText().toString());
-                    Log.d(LOG_TAG, "summ: " + summPrice);
-                    if (!mPrice2.getText().toString().isEmpty()) {
-                        summPriceTwoRate = Float.parseFloat(mPrice2.getText().toString());
-                    }
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-
-                Data.getInstance().setSummPrice(summPrice);
-                Log.d(LOG_TAG, "summ getInstance: " + summPrice);
-                Data.getInstance().setSummPriceTwoRate(summPriceTwoRate);
-                Data.getInstance().setResultTimeYears(resultTimeYears);
-                Data.getInstance().setResultTimeYearsTwoRate(resultTimeYearsTwoRate);
-                Data.getInstance().setSelectedHour(selectedHour);
-                Data.getInstance().setSelectedHourTwoRate(selectedHourTwoRate);
-                Data.getInstance().setPercent(percent);
-                Data.getInstance().setChecked(checked);
 
                 viewPager.setCurrentItem(pos);
             }
@@ -147,6 +165,7 @@ try {
             public void onClick(View v) {
                 SwitchCompat sw = (SwitchCompat) v;
                 checked = ((SwitchCompat) v).isChecked();
+                Data.getInstance().setChecked(checked);
                 if (sw.isChecked()) {
                     tax_layout.startAnimation(animationFadeIn);
                     TransitionManager.beginDelayedTransition(sceneRoot);
@@ -211,9 +230,10 @@ try {
                                        int position, long id) {
 
                 selectedHour = (int) spinnerHour.getSelectedItem();
+                Data.getInstance().setSelectedHour(selectedHour);
                 try {
 
-                    resultTimeYears = selectedHour * 365;
+                    Data.getInstance().setResultTimeYears(selectedHour * 365);
 
                 } catch (NullPointerException e) {
                     e.printStackTrace();
@@ -234,9 +254,10 @@ try {
                                        int position, long id) {
 
                 selectedHourTwoRate = (int) spinnerRatesTwoHour.getSelectedItem();
+                Data.getInstance().setSelectedHourTwoRate(selectedHourTwoRate);
                 try {
 
-                    resultTimeYearsTwoRate = selectedHourTwoRate * 365;
+                    Data.getInstance().setResultTimeYearsTwoRate(selectedHourTwoRate * 365);
 
                 } catch (NullPointerException e) {
                     e.printStackTrace();
@@ -258,7 +279,7 @@ try {
                                        int position, long id) {
 
                 percent = (int) spinnerPercent.getSelectedItem();// проценты из раскрывающегося списка по позиции
-
+                Data.getInstance().setPercent(percent);
             }
 
             @Override

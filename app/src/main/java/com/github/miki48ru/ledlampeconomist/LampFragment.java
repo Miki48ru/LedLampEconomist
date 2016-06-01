@@ -71,6 +71,8 @@ public class LampFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_lamp, container, false);
+
+
     }
 
     @Override
@@ -91,11 +93,15 @@ public class LampFragment extends Fragment {
         spinnerPowerLamp = (Spinner) getActivity().findViewById(R.id.spinner_power_lamp);
         adapterSpinnerPower();
         setClicklistenerPowerSpinner();
-
+        Log.d(LOG_TAG, "onViewCreated");
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
-
+        setTextResult();
+    }
 
     public void adapterSpinnerPower() {
 
@@ -103,6 +109,7 @@ public class LampFragment extends Fragment {
                 android.R.layout.simple_spinner_item, listPower);
         ((ArrayAdapter<Integer>) spinnerAdapter).setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPowerLamp.setAdapter(spinnerAdapter);
+        Log.d(LOG_TAG, "adapterSpinnerPower()");
     }
 
     public void setClicklistenerPowerSpinner() {
@@ -110,7 +117,9 @@ public class LampFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
 
+                Log.d(LOG_TAG, "setClicklistenerPowerSpinner()");
                 selectedPower = (int) spinnerPowerLamp.getSelectedItem();// переменная мощности лампы
+                Data.getInstance().setSelectedPower(selectedPower);
                 Log.d(LOG_TAG, "selectedPower in setClicklistenerPowerSpinner = " + selectedPower);
 
 
@@ -122,6 +131,7 @@ public class LampFragment extends Fragment {
 
                 setTextResult();
 
+
             }
 
             @Override
@@ -130,47 +140,11 @@ public class LampFragment extends Fragment {
         });
     }
 
-    public void onSelected() {
-        // получаем данные из объекта-синглетона
-        summPriceLampFrg = Data.getInstance().getSummPrice();
-        Log.d(LOG_TAG, "summPriceLampFrg getInstance in LampFragment = " + summPriceLampFrg);
-
-        summPriceTwoRate = Data.getInstance().getSummPriceTwoRate();
-        Log.d(LOG_TAG, "summPriceTwoRate = " + summPriceTwoRate);
-
-        resultTimeYearsLampFrg = Data.getInstance().getResultTimeYears();
-        Log.d(LOG_TAG, " resultTimeYearsLampFrg = " +  resultTimeYearsLampFrg);
-
-        resultTimeYearsTwoRateLamp = Data.getInstance().getResultTimeYearsTwoRate();
-        percent = Data.getInstance().getPercent();
-        checked = Data.getInstance().isChecked();
-        Log.d(LOG_TAG, "checked = " + checked);
-
-
-    }
     public void setTextResult(){
-        summPriceLamp = (selectedPower * resultTimeYearsLampFrg / watt * summPriceLampFrg);
-        Log.d(LOG_TAG, "result price: " + summPriceLamp + " " + selectedPower + " " + resultTimeYearsLampFrg + " " + watt + " " + summPriceLampFrg);
 
-
-        // мощность * общее время работы ламп по тарифу 1 / на 1000 ватт * на стоимость тарифа выбранного пользователем (дробное число)
-        summPriceTwoRateLamp = (selectedPower * resultTimeYearsTwoRateLamp / watt * summPriceTwoRate);
-        Log.d(LOG_TAG, "selectedPower in LampFragment: " + selectedPower);
-        Log.d(LOG_TAG, "result price2: " + summPriceTwoRateLamp);
-
-        try {
-            // если чекбокс включен, то тариф 2 расчитывается
-            if (checked == true) {
-                tvTimePrice.setText(String.valueOf(summPriceTwoRateLamp + summPriceLamp));
-                //Math.round - округление значения
-            } else {
-                tvTimePrice.setText(String.valueOf(summPriceLamp));
-            }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-
-        }
+        tvTimePrice.setText(String.valueOf(Data.getInstance().getSummPriceLamp()));
     }
+
 
 }
 

@@ -45,9 +45,15 @@ public class MainActivity extends AppCompatActivity {
                 // получаем ссылку на сам фрагмент
                 Fragment fragment = adapter.getItem(position);
 
-                if (fragment instanceof LampFragment) {
-                    ((LampFragment) fragment).onSelected();
+                try {
+                    if (fragment instanceof LampFragment) {
+                        ((LampFragment) fragment).setTextResult();
                 }
+
+                } catch (NullPointerException e){
+                    e.printStackTrace();
+                }
+
             }
 
             @Override

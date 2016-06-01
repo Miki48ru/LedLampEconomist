@@ -14,6 +14,25 @@ public class Data {
     private float summPriceTwoRate = 0;
     private boolean checked;
 
+    private int selectedPower;
+    private int watt = 1000;
+
+    public int getSelectedPower() {
+        return selectedPower;
+    }
+
+    public void setSelectedPower(int selectedPower) {
+        this.selectedPower = selectedPower;
+    }
+
+    public int getWatt() {
+        return watt;
+    }
+
+    public void setWatt(int watt) {
+        this.watt = watt;
+    }
+
     private static Data instance = new Data();
 
     public static Data getInstance() {
@@ -87,4 +106,18 @@ public class Data {
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
+
+
+    public float getSummPriceLamp(){
+        if(checked){
+            float summPriceLamp = (selectedPower * resultTimeYears / watt * summPrice);
+            float summPriceTwoRateLamp = (selectedPower * resultTimeYearsTwoRate / watt * summPriceTwoRate);
+            return summPriceTwoRateLamp + summPriceLamp;
+        }else {
+            float summPriceLamp = (selectedPower * resultTimeYears / watt * summPrice);
+            return summPriceLamp;
+        }
+    }
+
+
 }
