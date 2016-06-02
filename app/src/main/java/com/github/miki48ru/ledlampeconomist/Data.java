@@ -2,6 +2,8 @@ package com.github.miki48ru.ledlampeconomist;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by Mike on 23.05.2016.
  */
@@ -21,6 +23,12 @@ public class Data {
     private int watt = 1000;
     private float priceLed;
     private int powerLed;
+
+    public Data() {
+        yearResults = new ArrayList<YearResult>();
+    }
+
+    private ArrayList<YearResult> yearResults;
 
     public float getPriceLed() {
         return priceLed;
@@ -170,12 +178,12 @@ public class Data {
     public float getResultPriceLampAllRates(){
         float resultPriceLampAllRates = Math.round(((float) selectedPower / watt * resultTimeYears * summPrice) +
                 ((float) selectedPower / watt * resultTimeYearsTwoRate * summPriceTwoRate) +
-                (changeLamp * priceLamp)); //Math.round - округление значения
+                (changeLamp * priceLamp) + priceLamp); //Math.round - округление значения
         return resultPriceLampAllRates;
     }
     public float getResultPriceLampOneRates(){
         float resultPriceLampOneRate = Math.round(((float) selectedPower / watt * resultTimeYears * summPrice) +
-                (changeLamp * priceLamp));
+                (changeLamp * priceLamp) + priceLamp);
         return resultPriceLampOneRate;
     }
     public float getResultPriceLedAllRates(){
@@ -187,6 +195,18 @@ public class Data {
     public float getResultPriceLedOneRates(){
         float resultPriceLedOneRate = Math.round(((float) powerLed / watt * resultTimeYears * summPrice) + priceLamp);
         return resultPriceLedOneRate;
+    }
+
+   public void simulateFiveYears(){
+//тут расчет для первого года,
+       /* YearResult firstYearResult = new YearResult();
+        firstYearResult.setTitle("Результат за первый год");
+        firstYearResult.setLampCost(значение);
+        firstYearResult.setLedLampCost(значение);
+        firstYearResult.setProfit(значение);*/
+//а после
+        // yearResults.add(firstYearResult);
+//и так рассчитать для всех 5 лет
     }
 
 

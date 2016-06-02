@@ -171,7 +171,6 @@ public class ElectricFragment extends Fragment {
 
         final Animation animationFadeOut = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out);
         final Animation animationFadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
-        final ViewGroup sceneRoot = (ViewGroup) getActivity().findViewById(R.id.main_layout);
         final View tax_layout = getActivity().findViewById(R.id.tax_layout);
 
 
@@ -222,25 +221,6 @@ public class ElectricFragment extends Fragment {
                                          }
                                      }
                                  });
-                    /*tax_layout.startAnimation(animationFadeIn);
-                    TransitionManager.beginDelayedTransition(sceneRoot);
-
-                    // и применим сами изменения
-                    ViewGroup.LayoutParams params = tax_layout.getLayoutParams();
-//                    params.width = 0;
-                    params.height = visibleHeight;
-                    tax_layout.setLayoutParams(params);
-                } else {
-                    tax_layout.startAnimation(animationFadeOut);
-                    // вызываем метод, говорящий о том, что мы хотим анимировать следующие изменения внутри sceneRoot
-                    TransitionManager.beginDelayedTransition(sceneRoot);
-
-                    // и применим сами изменения
-                    ViewGroup.LayoutParams params = tax_layout.getLayoutParams();
-//                    params.width = 0;
-                    params.height = 0;
-                    tax_layout.setLayoutParams(params);
-                }*/
 
         adapterSpinnerHours();
         adapterSpinnerHours2Rate();

@@ -147,7 +147,7 @@ public class LedLampFragment extends Fragment {
         });
     }
 
-    private void setTextResultLed() {
+    public void setTextResultLed() {
         if(tvTimePriceLed!=null)
             tvTimePriceLed.setText(String.valueOf(Data.getInstance().getSummPriceLed()));
     }

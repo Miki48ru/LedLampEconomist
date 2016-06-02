@@ -4,7 +4,14 @@
     android:layout_height="match_parent"
     android:paddingLeft="25dp"
     android:paddingRight="25dp"
+    android:paddingBottom="25dp"
     tools:context="com.github.miki48ru.ledlampeconomist.LampFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
 
     <LinearLayout
         android:orientation="vertical"
@@ -102,6 +109,8 @@
                 android:id="@+id/spinner_hours_2" />
         </LinearLayout>
 
+    </LinearLayout>
+
         <Button
 
             android:layout_width="match_parent"
@@ -110,8 +119,9 @@
             android:drawableRight="@drawable/ic_r_arr"
             android:text="@string/bt_next"
             android:paddingRight="10dp"
-            android:id="@+id/btNextElectric" />
+            android:id="@+id/btNextElectric"
+            android:layout_alignParentBottom="true" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </FrameLayout>

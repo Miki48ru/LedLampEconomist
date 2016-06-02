@@ -4,9 +4,16 @@
     android:layout_height="match_parent"
     android:paddingLeft="25dp"
     android:paddingRight="25dp"
+    android:paddingBottom="25dp"
     tools:context="com.github.miki48ru.ledlampeconomist.LampFragment">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl_lamp_frag">
+
 
     <LinearLayout
+        android:id="@+id/ll_lamp_frag"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,13 +22,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/PageTitle"
-            android:text="Лампа накаливания" />
+            android:text="@string/tv_lamp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Description"
-            android:text="Мощность лампы" />
+            android:text="@string/tv_power_lamp" />
 
         <Spinner
             android:id="@+id/spinner_power_lamp"
@@ -76,16 +83,19 @@
             android:drawableRight="@drawable/ic_rouble_orange"
             android:text="0,00 " />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/buttonNext"
-            android:drawableRight="@drawable/ic_r_arr"
-            android:text="Далее"
-            android:paddingRight="10dp"
-            android:id="@+id/bt_next_lamp" />
+
 
 
     </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/buttonNext"
+        android:drawableRight="@drawable/ic_r_arr"
+        android:text="Далее"
+        android:paddingRight="10dp"
+        android:id="@+id/bt_next_lamp"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>
 
 </FrameLayout>

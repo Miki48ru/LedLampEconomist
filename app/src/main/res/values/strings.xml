@@ -75,4 +75,6 @@
     <string name="tv_percent">Подорожание тарифа за электричество в год</string>
     <string name="tv_counter">Двухтарифный счётчик</string>
     <string name="bt_next">Далее</string>
+    <string name="tv_lamp">Лампа накаливания</string>
+    <string name="tv_power_lamp">Мощность лампы, ватт</string>
 </resources>

@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
                     if (fragment instanceof LampFragment)
                         ((LampFragment) fragment).setTextResult();
+                if (fragment instanceof LedLampFragment)
+                    ((LedLampFragment) fragment).setTextResultLed();
 
             }
 
@@ -68,8 +70,12 @@ class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
     // массив ресурсов-ссылок на иконки для вкладок
     private int[] imageResId = {
             R.drawable.ic_electric_selected,
+            R.drawable.ic_electric_inactive,
+            R.drawable.ic_lamp_selected,
             R.drawable.ic_lamp_inactive,
+            R.drawable.ic_lamp_led_selected,
             R.drawable.ic_lamp_led_inactive,
+            R.drawable.ic_rouble_selected,
             R.drawable.ic_rouble_inactive
     };
 
