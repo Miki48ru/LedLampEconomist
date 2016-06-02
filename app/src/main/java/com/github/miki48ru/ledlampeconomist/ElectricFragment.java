@@ -132,7 +132,7 @@ public class ElectricFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 Log.d(LOG_TAG, "mPrice ElectricFrag onTextChanged: " + s.toString());
-                if(TextUtils.isEmpty(s))
+                if (TextUtils.isEmpty(s))
                     s = "0";
                 try {
                     summPriceTwoRate = Float.parseFloat(s.toString());
@@ -173,23 +173,56 @@ public class ElectricFragment extends Fragment {
         final Animation animationFadeIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
         final ViewGroup sceneRoot = (ViewGroup) getActivity().findViewById(R.id.main_layout);
         final View tax_layout = getActivity().findViewById(R.id.tax_layout);
-        final int visibleHeight = tax_layout.getLayoutParams().height;
 
-        // скрываем группу
-        ViewGroup.LayoutParams params = tax_layout.getLayoutParams();
-        params.height = 0;
-        tax_layout.setLayoutParams(params);
 
         SwitchCompat swTax = (SwitchCompat) getActivity().findViewById(R.id.sw_double_tax);
         swTax.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                SwitchCompat sw = (SwitchCompat) v;
-                checked = ((SwitchCompat) v).isChecked();
-                Data.getInstance().setChecked(checked);
-                if (sw.isChecked()) {
-                    tax_layout.startAnimation(animationFadeIn);
+                                     @Override
+                                     public void onClick(View v) {
+                                         final SwitchCompat sw = (SwitchCompat) v;
+                                         checked = ((SwitchCompat) v).isChecked();
+                                         Data.getInstance().setChecked(checked);
+                                         if (sw.isChecked()) {
+                                             animationFadeIn.setAnimationListener(new Animation.AnimationListener() {
+                                                 @Override
+                                                 public void onAnimationStart(Animation animation) {
+                                                     tax_layout.setVisibility(View.INVISIBLE);
+                                                 }
+
+                                                 @Override
+                                                 public void onAnimationEnd(Animation animation) {
+                                                     tax_layout.setVisibility(View.VISIBLE);
+                                                 }
+
+                                                 @Override
+                                                 public void onAnimationRepeat(Animation animation) {
+
+                                                 }
+                                             });
+                                             tax_layout.startAnimation(animationFadeIn);
+                                         } else {
+                                             animationFadeOut.setAnimationListener(new Animation.AnimationListener() {
+                                                 @Override
+                                                 public void onAnimationStart(Animation animation) {
+                                                     tax_layout.setVisibility(View.INVISIBLE);
+                                                 }
+
+                                                 @Override
+                                                 public void onAnimationEnd(Animation animation) {
+                                                     tax_layout.setVisibility(View.GONE);
+                                                 }
+
+                                                 @Override
+                                                 public void onAnimationRepeat(Animation animation) {
+
+                                                 }
+                                             });
+                                             tax_layout.startAnimation(animationFadeOut);
+                                         }
+                                     }
+                                 });
+                    /*tax_layout.startAnimation(animationFadeIn);
                     TransitionManager.beginDelayedTransition(sceneRoot);
 
                     // и применим сами изменения
@@ -207,9 +240,7 @@ public class ElectricFragment extends Fragment {
 //                    params.width = 0;
                     params.height = 0;
                     tax_layout.setLayoutParams(params);
-                }
-            }
-        });
+                }*/
 
         adapterSpinnerHours();
         adapterSpinnerHours2Rate();

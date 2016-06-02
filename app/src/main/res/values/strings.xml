@@ -69,4 +69,10 @@
     <string name="last_text">Как видно из таблицы, выигрыш по затратам появляется уже на ___ году использования светодиодных ламп. </string>
     <string name="btn_lamp_update">обновить данные по лампам</string>
     <string name="btn_new_info">дополнительная информация</string>
+    <string name="tv_tax_2_price">Стоимость второго тарифа, рублей в час</string>
+    <string name="tv_tax_2_time_year">Среднее время освещения по второму тарифу</string>
+    <string name="tv_time_work_in_day">Среднее время освещения в сутки</string>
+    <string name="tv_percent">Подорожание тарифа за электричество в год</string>
+    <string name="tv_counter">Двухтарифный счётчик</string>
+    <string name="bt_next">Далее</string>
 </resources>

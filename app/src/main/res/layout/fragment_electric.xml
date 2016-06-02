@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/FieldLabel"
-            android:text="Среднее время освещения в сутки" />
+            android:text="@string/tv_time_work_in_day" />
 
         <Spinner
             android:layout_width="match_parent"
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/FieldLabel"
-            android:text="Подорожание тарифа за электричество в год" />
+            android:text="@string/tv_percent" />
 
         <Spinner
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Subhead"
-            android:text="Двухтарифный счётчик"
+            android:text="@string/tv_counter"
             android:id="@+id/sw_double_tax"
             />
 
@@ -71,17 +71,19 @@
             android:orientation="vertical"
             android:id="@+id/tax_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text="@string/tv_tax_2_price"
+                style="@style/FieldLabel"
                 android:id="@+id/textView4" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:ems="10"
@@ -90,21 +92,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text="@string/tv_tax_2_time_year"
+                style="@style/FieldLabel"
                 android:id="@+id/textView5" />
 
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_hours_2" />
         </LinearLayout>
 
         <Button
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/buttonNext"
             android:drawableRight="@drawable/ic_r_arr"
-            android:text="Далее"
+            android:text="@string/bt_next"
             android:paddingRight="10dp"
             android:id="@+id/btNextElectric" />
 
