@@ -21,24 +21,24 @@ public class YearResult {
         this.title = title;
     }
 
-    public float getLampCost() {
-        return lampCost;
+    public int getLampCost() {
+        return (int) lampCost;
     }
 
     public void setLampCost(float lampCost) {
         this.lampCost = lampCost;
     }
 
-    public float getLedLampCost() {
-        return ledLampCost;
+    public int getLedLampCost() {
+        return (int) ledLampCost;
     }
 
-    public void setLedLampCost(float ledLapmCost) {
-        this.ledLampCost = ledLapmCost;
+    public void setLedLampCost(float ledLampCost) {
+        this.ledLampCost = ledLampCost;
     }
 
-    public float getProfit() {
-        return profit;
+    public int getProfit() {
+        return (int) profit;
     }
 
     public void setProfit(float profit) {
@@ -50,7 +50,7 @@ public class YearResult {
         final StringBuilder sb = new StringBuilder("YearResult{");
         sb.append("title='").append(title).append('\'');
         sb.append(", lampCost=").append(lampCost);
-        sb.append(", ledLapmCost=").append(ledLampCost);
+        sb.append(", ledLampCost=").append(ledLampCost);
         sb.append(", profit=").append(profit);
         sb.append('}');
         return sb.toString();

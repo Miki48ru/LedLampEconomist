@@ -84,7 +84,7 @@ public class LedLampFragment extends Fragment {
                 try {
                     priceLed = Float.parseFloat(s.toString());
                     Data.getInstance().setPriceLed(priceLed);
-                    Log.d(LOG_TAG, "price Led: " + Data.getInstance().getPriceLed());
+                    Log.d(LOG_TAG, "price Led: " + priceLed);
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                     Toast.makeText(getActivity(), "Введены данные неверного формата", Toast.LENGTH_SHORT).show();

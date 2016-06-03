@@ -83,4 +83,7 @@
     <style name="buttonNext">
         <item name="android:background">#e74c3c</item>
     </style>
+    <style name="buttonMore">
+        <item name="android:background">#FFFFFF</item>
+    </style>
 </resources>

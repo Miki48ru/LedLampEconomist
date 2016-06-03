@@ -13,13 +13,13 @@ public class Data {
 
     final String LOG_TAG = "my logs";
 
-    private int resultTimeYears;
-    private int resultTimeYearsTwoRate;
+    private float resultTimeYears;
+    private float resultTimeYearsTwoRate;
     private int selectedHour;
     private int selectedHourTwoRate;
     private int percent;
-    private float summPrice = 0;
-    private float summPriceTwoRate = 0;
+    private float summPrice;
+    private float summPriceTwoRate;
     private boolean checked;
     private float priceLamp;
     private int changeLamp;
@@ -33,6 +33,14 @@ public class Data {
     }
 
     private ArrayList<YearResult> yearResults;
+
+    public ArrayList<YearResult> getYearResults() {
+        return yearResults;
+    }
+
+    public void setYearResults(ArrayList<YearResult> yearResults) {
+        this.yearResults = yearResults;
+    }
 
     public float getPriceLed() {
         return priceLed;
@@ -93,7 +101,7 @@ public class Data {
         return instance;
     }
 
-    public int getResultTimeYears() {
+    public float getResultTimeYears() {
         return resultTimeYears;
     }
 
@@ -101,7 +109,7 @@ public class Data {
         this.resultTimeYears = resultTimeYears;
     }
 
-    public int getResultTimeYearsTwoRate() {
+    public float getResultTimeYearsTwoRate() {
         return resultTimeYearsTwoRate;
     }
 
@@ -161,21 +169,21 @@ public class Data {
     public float getSummPriceLamp(){
         if(checked){
             float summPriceLamp = (selectedPower * resultTimeYears / watt * summPrice);
-            float summPriceTwoRateLamp = (selectedPower * resultTimeYearsTwoRate / watt * summPriceTwoRate);
-            return summPriceTwoRateLamp + summPriceLamp;
+            float summPriceTwoRateLamp =(selectedPower * resultTimeYearsTwoRate / watt * summPriceTwoRate);
+            return new BigDecimal(summPriceLamp + summPriceTwoRateLamp).setScale(2, RoundingMode.DOWN).floatValue();  //summPriceTwoRateLamp + summPriceLamp;
         }else {
             float summPriceLamp = (selectedPower * resultTimeYears / watt * summPrice);
-            return summPriceLamp;
+            return new BigDecimal(summPriceLamp).setScale(2, RoundingMode.DOWN).floatValue();
         }
     }
     public float getSummPriceLed(){
         if(checked){
             float summPriceLed = (powerLed * resultTimeYears / watt * summPrice);
             float summPriceTwoRateLed = (powerLed * resultTimeYearsTwoRate / watt * summPriceTwoRate);
-            return summPriceTwoRateLed + summPriceLed;
+            return new BigDecimal(summPriceLed + summPriceTwoRateLed).setScale(2, RoundingMode.DOWN).floatValue();
         }else {
             float summPriceLed = (powerLed * resultTimeYears / watt * summPrice);
-            return summPriceLed;
+            return new BigDecimal(summPriceLed).setScale(2, RoundingMode.DOWN).floatValue();
         }
     }
 
@@ -239,66 +247,122 @@ public class Data {
         return new BigDecimal(result).setScale(2, RoundingMode.DOWN).doubleValue();
     }
 
-    public double getLampResultFirstYear(int lampPower, float tarif1, int workTime1,
-                                         float tarif2, int workTime2, int dayCount,
-                                         float lampPrice, float replacePrice, int replaceCount,
-                                         int percent){
-        return getLampResult(lampPower, tarif1, workTime1,tarif2, workTime2, dayCount, lampPrice, replacePrice, replaceCount, percent, 0);
-    }
+    public void simulateFiveYears(){
+        //<editor-fold desc="Логи входных данных">
+        Log.e("Данные:обычная лампа:","Мощность лампы:"+selectedPower+"\nТариф 1:"+summPrice+"\nВремя работы Т1:"+selectedHour
+                +"\nТариф 2:"+summPriceTwoRate+"\nВремя работы Т2:"+selectedHourTwoRate+"\nКол-во дней:"+365
+                +"\nСтоимость лампы:"+priceLamp+"\nСтоимость замены:"+priceLamp+"\nКол-во замен:"+changeLamp
+                +"\n% увеличения:"+percent+"\nГод:первый");
+        Log.e("Данные:led лампа:","Мощность лампы:"+powerLed+"\nТариф 1:"+summPrice+"\nВремя работы Т1:"+selectedHour
+                +"\nТариф 2:"+summPriceTwoRate+"\nВремя работы Т2:"+selectedHourTwoRate+"\nКол-во дней:"+365
+                +"\nСтоимость лампы:"+priceLed+"\nСтоимость замены:"+0+"\nКол-во замен:"+0
+                +"\n% увеличения:"+percent+"\nГод:первый");
+        //</editor-fold>
 
-    public double getLampResultSecondYear(int lampPower, float tarif1, int workTime1,
-                                          float tarif2, int workTime2, int dayCount,
-                                          float lampPrice, float replacePrice, int replaceCount,
-                                          int percent){
-        return getLampResult(lampPower, tarif1, workTime1,tarif2, workTime2, dayCount, lampPrice, replacePrice, replaceCount, percent, 0) +
-                getLampResult(lampPower, tarif1, workTime1,tarif2, workTime2, dayCount, lampPrice, replacePrice, replaceCount, percent, 1);
-    }
+        yearResults.clear();
 
-    public double getLampResultThirdYear(int lampPower, float tarif1, int workTime1,
-                                         float tarif2, int workTime2, int dayCount,
-                                         float lampPrice, float replacePrice, int replaceCount,
-                                         int percent){
-        return getLampResult(lampPower, tarif1, workTime1,tarif2, workTime2, dayCount, lampPrice, replacePrice, replaceCount, percent, 0) +
-                getLampResult(lampPower, tarif1, workTime1,tarif2, workTime2, dayCount, lampPrice, replacePrice, replaceCount, percent, 1) +
-                getLampResult(lampPower, tarif1, workTime1,tarif2, workTime2, dayCount, lampPrice, replacePrice, replaceCount, percent, 2);
-    }
+        //<editor-fold desc="Расчет для первого года">
+        float lampFirstY = (float) getLampResult(selectedPower, summPrice, selectedHour, summPriceTwoRate,
+                selectedHourTwoRate, 365, priceLamp, priceLamp, changeLamp, percent, 0);
+        float ledlampFirstY = (float) getLampResult(powerLed, summPrice, selectedHour, summPriceTwoRate,
+                selectedHourTwoRate, 365, priceLed, 0, 0, percent, 0);
 
-    public double getLampResultFourYear(int lampPower, float tarif1, int workTime1,
-                                        float tarif2, int workTime2, int dayCount,
-                                        float lampPrice, float replacePrice, int replaceCount,
-                                        int percent){
-        return getLampResult(lampPower, tarif1, workTime1,tarif2, workTime2, dayCount, lampPrice, replacePrice, replaceCount, percent, 0) +
-                getLampResult(lampPower, tarif1, workTime1,tarif2, workTime2, dayCount, lampPrice, replacePrice, replaceCount, percent, 1) +
-                getLampResult(lampPower, tarif1, workTime1,tarif2, workTime2, dayCount, lampPrice, replacePrice, replaceCount, percent, 2) +
-                getLampResult(lampPower, tarif1, workTime1,tarif2, workTime2, dayCount, lampPrice, replacePrice, replaceCount, percent, 3);
-    }
+        float delta = lampFirstY - ledlampFirstY;
 
-    public void simulateTwoYears(){
-        float lampFirstY = (float) getLampResultFirstYear(selectedPower, summPrice, selectedHour, summPriceTwoRate,
-                selectedHourTwoRate, 365, priceLamp, priceLamp, changeLamp, percent);
-        float ledlampFirstY = (float) getLampResultFirstYear(powerLed, summPrice, selectedHour, summPriceTwoRate,
-                selectedHourTwoRate, 365, priceLamp, 0, 0, percent);
-        float delta = ledlampFirstY - lampFirstY;
         YearResult firstYearResult = new YearResult();
         firstYearResult.setTitle("Результат за первый год");
         firstYearResult.setLampCost(lampFirstY);
         firstYearResult.setLedLampCost(ledlampFirstY);
         firstYearResult.setProfit(delta);
+        Log.e("Сравнение:первый год",firstYearResult.toString());
         yearResults.add(firstYearResult);
+        //</editor-fold>
+
+        //<editor-fold desc="Расчет для вторго года">
         //для второго года
-        float lampSecondY = (float) getLampResultSecondYear(selectedPower, summPrice, selectedHour, summPriceTwoRate,
-                selectedHourTwoRate, 365, priceLamp, priceLamp, changeLamp, percent);
-        float ledlampSecondY = (float) getLampResultSecondYear(powerLed, summPrice, selectedHour, summPriceTwoRate,
-                selectedHourTwoRate, 365, priceLamp, 0, 0, percent);
-        float deltaSecond = ledlampSecondY - lampSecondY;
+        float lampSecondY = (float) getLampResult(selectedPower, summPrice, selectedHour, summPriceTwoRate,
+                selectedHourTwoRate, 365, 0, priceLamp, changeLamp, percent, 1);
+        float ledlampSecondY = (float) getLampResult(powerLed, summPrice, selectedHour, summPriceTwoRate,
+                selectedHourTwoRate, 365, 0, 0, 0, percent, 1);
+
+        lampSecondY = lampFirstY+lampSecondY;
+        ledlampSecondY = ledlampFirstY+ledlampSecondY;
+
+        float deltaSecond = lampSecondY - ledlampSecondY;
+
         YearResult secondYearResult = new YearResult();
-        secondYearResult.setTitle("Результат за первый год");
+        secondYearResult.setTitle("Результат за второй год");
         secondYearResult.setLampCost(lampSecondY);
         secondYearResult.setLedLampCost(ledlampSecondY);
-        secondYearResult.setProfit(delta);
+        secondYearResult.setProfit(deltaSecond);
         yearResults.add(secondYearResult);
-        Log.d("РЕЗУЛЬТАТ: ", yearResults.toString());
-//и в лог
-    }
+        Log.e("Сравнение:второй год",secondYearResult.toString());
+        //</editor-fold>
 
+        //<editor-fold desc="Расчет для третьего года">
+        //для второго года
+        float lampThirdY = (float) getLampResult(selectedPower, summPrice, selectedHour, summPriceTwoRate,
+                selectedHourTwoRate, 365, 0, priceLamp, changeLamp, percent, 2);
+        float ledlampThirdY = (float) getLampResult(powerLed, summPrice, selectedHour, summPriceTwoRate,
+                selectedHourTwoRate, 365, 0, 0, 0, percent, 2);
+
+        lampThirdY = lampSecondY + lampThirdY;
+        ledlampThirdY = ledlampSecondY + ledlampThirdY;
+
+        float deltaThird = lampThirdY - ledlampThirdY;
+
+        YearResult thirdYearResult = new YearResult();
+        thirdYearResult.setTitle("Результат за третий год");
+        thirdYearResult.setLampCost(lampThirdY);
+        thirdYearResult.setLedLampCost(ledlampThirdY);
+        thirdYearResult.setProfit(deltaThird);
+        yearResults.add(thirdYearResult);
+        Log.e("Сравнение:третий год",thirdYearResult.toString());
+        //</editor-fold>
+
+        //<editor-fold desc="Расчет для четвертого года">
+        //для второго года
+        float lampFourY = (float) getLampResult(selectedPower, summPrice, selectedHour, summPriceTwoRate,
+                selectedHourTwoRate, 365, 0, priceLamp, changeLamp, percent, 3);
+        float ledlampFourY = (float) getLampResult(powerLed, summPrice, selectedHour, summPriceTwoRate,
+                selectedHourTwoRate, 365, 0, 0, 0, percent, 3);
+
+        lampFourY = lampThirdY + lampFourY;
+        ledlampFourY = ledlampThirdY + ledlampFourY;
+
+        float deltaFour = lampFourY - ledlampFourY;
+
+        YearResult fourYearResult = new YearResult();
+        fourYearResult.setTitle("Результат за четвертый год");
+        fourYearResult.setLampCost(lampFourY);
+        fourYearResult.setLedLampCost(ledlampFourY);
+        fourYearResult.setProfit(deltaFour);
+        yearResults.add(fourYearResult);
+        Log.e("Сравнение:Четвертый год",fourYearResult.toString());
+        //</editor-fold>
+
+        //<editor-fold desc="Расчет для пятого года">
+        //для второго года
+        float lampFifthY = (float) getLampResult(selectedPower, summPrice, selectedHour, summPriceTwoRate,
+                selectedHourTwoRate, 365, 0, priceLamp, changeLamp, percent, 4);
+        float ledlampFifthY = (float) getLampResult(powerLed, summPrice, selectedHour, summPriceTwoRate,
+                selectedHourTwoRate, 365, 0, 0, 0, percent, 4);
+
+        lampFifthY = lampFourY + lampFifthY;
+        ledlampFifthY = ledlampFourY + ledlampFifthY;
+
+        float deltaFifth = lampFifthY - ledlampFifthY;
+
+        YearResult fifthYearResult = new YearResult();
+        fifthYearResult.setTitle("Результат за пятый год");
+        fifthYearResult.setLampCost(lampFifthY);
+        fifthYearResult.setLedLampCost(ledlampFifthY);
+        fifthYearResult.setProfit(deltaFifth);
+        yearResults.add(fifthYearResult);
+        Log.e("Сравнение:Пятый год",fifthYearResult.toString());
+        //</editor-fold>
+
+        //Log.e("РЕЗУЛЬТАТ: ", yearResults.toString());
+
+    }
 }

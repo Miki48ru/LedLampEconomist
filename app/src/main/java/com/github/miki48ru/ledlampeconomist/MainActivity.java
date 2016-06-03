@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
                         ((LampFragment) fragment).setTextResult();
                 if (fragment instanceof LedLampFragment)
                     ((LedLampFragment) fragment).setTextResultLed();
+                if (fragment instanceof EconomyFragment)
+                    ((EconomyFragment) fragment).updateData();
 
             }
 

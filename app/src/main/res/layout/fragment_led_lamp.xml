@@ -4,7 +4,11 @@
     android:layout_height="match_parent"
     android:paddingLeft="25dp"
     android:paddingRight="25dp"
+    android:paddingBottom="25dp"
     tools:context="com.github.miki48ru.ledlampeconomist.LampFragment">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:orientation="vertical"
@@ -64,16 +68,20 @@
             android:drawableRight="@drawable/ic_rouble_orange"
             android:text="210,00 " />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/buttonNext"
-            android:drawableRight="@drawable/ic_r_arr"
-            android:text="Далее"
-            android:paddingRight="10dp"
-            android:id="@+id/bt_next_ledlamp" />
 
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/buttonNext"
+        android:drawableRight="@drawable/ic_r_arr"
+        android:text="Далее"
+        android:textAllCaps="false"
+        android:paddingRight="10dp"
+        android:id="@+id/bt_next_ledlamp"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
 
 </FrameLayout>

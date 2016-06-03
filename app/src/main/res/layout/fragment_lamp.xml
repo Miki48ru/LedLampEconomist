@@ -92,6 +92,7 @@
         android:layout_height="wrap_content"
         style="@style/buttonNext"
         android:drawableRight="@drawable/ic_r_arr"
+        android:textAllCaps="false"
         android:text="Далее"
         android:paddingRight="10dp"
         android:id="@+id/bt_next_lamp"
