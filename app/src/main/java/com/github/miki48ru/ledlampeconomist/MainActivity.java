@@ -18,7 +18,8 @@ import android.util.Log;
 public class MainActivity extends AppCompatActivity {
 
     final String LOG_TAG = MainActivity.class.toString();
-    ViewPager viewPager;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
     int curPage = 0;
 
     @Override
@@ -27,10 +28,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
+        tabLayout = (TabLayout)findViewById(R.id.sliding_tabs);
         viewPager.setAdapter(new SampleFragmentPagerAdapter(getSupportFragmentManager(),
                 MainActivity.this));
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        selectTabs(0);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+
+                selectTabs(position);
                 Log.d(LOG_TAG, "onPageSelected " + position);
                 // получаем ссылку на адаптер фрагментов pager'a
                 FragmentPagerAdapter adapter = (FragmentPagerAdapter) viewPager.getAdapter();
@@ -60,6 +65,41 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    private void selectTabs(int position){
+        switch (position){
+            case 0:activeElectricTab();break;
+            case 1:activeLampTab();break;
+            case 2:activeLedLampTab();break;
+            case 3:activeResultTab();break;
+            default:activeElectricTab();break;
+        }
+    }
+
+    private void activeElectricTab(){
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_electric_selected);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_lamp_inactive);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_lamp_led_inactive);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_rouble_inactive);
+    }
+    private void activeLampTab(){
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_electric_inactive);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_lamp_selected);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_lamp_led_inactive);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_rouble_inactive);
+    }
+    private void activeLedLampTab(){
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_electric_inactive);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_lamp_inactive);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_lamp_led_selected);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_rouble_inactive);
+    }
+    private void activeResultTab(){
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_electric_inactive);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_lamp_inactive);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_lamp_led_inactive);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_rouble_selected);
+    }
+
 }
 
 class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -112,16 +152,11 @@ class SampleFragmentPagerAdapter extends FragmentPagerAdapter {
         return fragment;
     }
 
-    // возвращает заголовок вкладки для укзанного №
-    @Override
-    public CharSequence getPageTitle(int position) {
-        // создаём изображение на основе ресурса
-        Drawable image = ContextCompat.getDrawable(context, imageResId[position]);
-        image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
-        // вместо обычного текста используем HTML-текст с картинкой
-        SpannableString sb = new SpannableString(" ");
-        ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
-        sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return sb;
+
+
+
+    public CharSequence getPageTitle() {
+
+        return " ";
     }
 }

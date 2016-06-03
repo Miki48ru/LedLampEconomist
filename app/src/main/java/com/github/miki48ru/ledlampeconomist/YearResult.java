@@ -6,7 +6,7 @@ package com.github.miki48ru.ledlampeconomist;
 public class YearResult {
     private String title;
     private float lampCost;
-    private float ledLapmCost;
+    private float ledLampCost;
     private float profit;
 
     public YearResult() {
@@ -29,12 +29,12 @@ public class YearResult {
         this.lampCost = lampCost;
     }
 
-    public float getLedLapmCost() {
-        return ledLapmCost;
+    public float getLedLampCost() {
+        return ledLampCost;
     }
 
-    public void setLedLapmCost(float ledLapmCost) {
-        this.ledLapmCost = ledLapmCost;
+    public void setLedLampCost(float ledLapmCost) {
+        this.ledLampCost = ledLapmCost;
     }
 
     public float getProfit() {
@@ -50,7 +50,7 @@ public class YearResult {
         final StringBuilder sb = new StringBuilder("YearResult{");
         sb.append("title='").append(title).append('\'');
         sb.append(", lampCost=").append(lampCost);
-        sb.append(", ledLapmCost=").append(ledLapmCost);
+        sb.append(", ledLapmCost=").append(ledLampCost);
         sb.append(", profit=").append(profit);
         sb.append('}');
         return sb.toString();
