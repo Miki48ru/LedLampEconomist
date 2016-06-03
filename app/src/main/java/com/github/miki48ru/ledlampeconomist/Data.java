@@ -273,7 +273,7 @@ public class Data {
                 getLampResult(lampPower, tarif1, workTime1,tarif2, workTime2, dayCount, lampPrice, replacePrice, replaceCount, percent, 3);
     }
 
-    private void simulateTwoYears(){
+    public void simulateTwoYears(){
         float lampFirstY = (float) getLampResultFirstYear(selectedPower, summPrice, selectedHour, summPriceTwoRate,
                 selectedHourTwoRate, 365, priceLamp, priceLamp, changeLamp, percent);
         float ledlampFirstY = (float) getLampResultFirstYear(powerLed, summPrice, selectedHour, summPriceTwoRate,
